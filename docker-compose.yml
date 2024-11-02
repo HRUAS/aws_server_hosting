@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /mnt/efs/jenkins_home:/var/jenkins_home
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - PASSWORD=AKIAXYKJTMG6I3YOTKTF
+      - SUDO_PASSWORD=AKIAXYKJTMG6I3YOTKTF
+      - DEFAULT_WORKSPACE=/config/workspace
+    ports:
+      - "8443:8443"
+    volumes:
+      - /mnt/efs/code_server/config:/config
+    restart: unless-stopped
