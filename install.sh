@@ -34,3 +34,5 @@ docker-compose up -d code-server nginx
 # docker-compose up -d jenkins
 sudo -u ec2-user bash -c 'echo "all done" >> /home/ec2-user/all_done.flag'
 echo "alias gotocode='cd /mnt/efs/code_server/config/workspace; ls -lrt'" >> /home/ec2-user/.bashrc
+alias history='HISTTIMEFORMAT="%F %T " history'
+echo 'alias history="HISTTIMEFORMAT=\"%F %T \" history"' >> /home/ec2-user/.bashrc
