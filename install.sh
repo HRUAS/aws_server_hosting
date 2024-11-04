@@ -4,12 +4,9 @@ sudo yum update -y
 sudo yum install -y amazon-efs-utils 
 sudo yum install python -y
 sudo yum install pip -y
-echo "step 1"
 sudo mkdir /mnt/efs 
-echo "step 2"
 sudo mount -t efs -o tls fs-00899043510054dbc:/ /mnt/efs/ 
 sudo echo "fs-00899043510054dbc.efs.us-east-1.amazonaws.com:/ /mnt/efs efs _netdev,tls 0 0" >> /etc/fstab
-echo "step 3"
 sudo mount -a
 sudo chown -R ec2-user: /mnt/efs/
 mkdir /mnt/efs/jenkins_home
@@ -25,8 +22,6 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # pull the compose file for servers
-cd /home/ec2-user
-git clone https://github.com/HRUAS/aws_server_hosting.git
 cd /home/ec2-user/aws_server_hosting
 pip install -r requirements.txt
 mkdir ssl
